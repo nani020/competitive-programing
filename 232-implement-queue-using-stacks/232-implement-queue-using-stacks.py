@@ -1,26 +1,36 @@
-class MyQueue:
+class MyQueue(object):
 
     def __init__(self):
-        self.q = deque()
+  
+        self.stack1 = []
+        self.stack2 = []
+        self.front = None
+
+    def push(self, x):
+       
+        if not self.stack1:
+            self.front = x
+        self.stack1.append(x)
+
+    def pop(self):
         
-
-    def push(self, x: int) -> None:
-        self.q.append(x)
+        if not self.stack2:
+            while self.stack1:
+                self.stack2.append(self.stack1.pop())
+        ans = self.stack2.pop()
         
+        return ans
 
-    def pop(self) -> int:
-        for i in range(len(self.q)-1):
-            self.push(self.q.popleft())
-        return self.q.popleft()
-
-    def peek(self) -> int:
-        return self.queue[-1]
+    def peek(self):
         
+        if self.stack2:
+            return self.stack2[-1]
+        
+        return self.front
 
-    def empty(self) -> bool:
-        return len(self.q)==0
-
-	
+    def empty(self):
+        
+        return (not self.stack1 and not self.stack2)
         
 
 
@@ -30,27 +40,3 @@ class MyQueue:
 # param_2 = obj.pop()
 # param_3 = obj.peek()
 # param_4 = obj.empty()
-class MyQueue:
-
-		def __init__(self):
-			self.queue = []
-
-		def push(self, x: int) -> None:
-			self.queue.append(x)
-
-		def pop(self) -> int:
-			return self.queue.pop(0)
-
-		def peek(self) -> int:
-			return self.queue[0]
-
-		def empty(self) -> bool:
-			""" 
-			pythonのリストは何か入っていると、Trueとして扱われる
-			[] （空リスト）だとFalse
-			"""
-		
-			if self.queue:
-				return False
-
-			return True
