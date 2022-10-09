@@ -4,19 +4,18 @@ class Solution:
         Do not return anything, modify nums in-place instead.
         """
         N = len(nums)
-        pivot = 0
+        p = 0
         for i in range(N-1,0,-1):
             if nums[i-1] < nums[i]:
-                pivot = i
+                p = i
                 break
-        if pivot == 0:
+        if p == 0:
             nums.sort()
             return
-#then find the swap which first number > pivot
+
         swap = N-1
-        while nums[pivot-1] >= nums[swap]:
-            swap -=1
-#swap
-        nums[swap],nums[pivot-1] = nums[pivot-1],nums[swap]
-        nums[pivot:] = reversed(nums[pivot:])
+        while nums[p-1] >= nums[swap]:
+            swap-=1
+        nums[swap],nums[p-1] = nums[p-1],nums[swap]
+        nums[p:] = reversed(nums[p:])
         
